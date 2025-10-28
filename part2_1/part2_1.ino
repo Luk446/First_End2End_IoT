@@ -1,3 +1,5 @@
+// ------ Libraries ----------------
+
 #include <WiFi.h>
 #include <Adafruit_NeoPixel.h>
 #include <DHT.h>
@@ -7,27 +9,28 @@
 
 
 // ----------------------------- CONFIG ---------------------------------
-#define RGB_PIN 5           // ESP32-C3: make sure this is a free GPIO
-#define DHT_PIN 4
+#define RGB_PIN 5  // ESP32-C3: make sure this is a free GPIO
+#define DHT_PIN 6
 #define DHTTYPE DHT11
-// Most WS2812/NeoPixel strips are GRB, not RGB:
 #define NEOPIXEL_TYPE (NEO_GRB + NEO_KHZ800)
 
 #define ALARM_COLD 0.0
 #define ALARM_HOT 30.0
 #define WARN_COLD 10.0
 #define WARN_HOT 25.0
- 
+
 // WiFi
-const char* ssid = "devolo-875";
-const char* pass = "FWHMGSHUNQKBJKLW";
+//const char* ssid = "devolo-875";
+//const char* pass = "FWHMGSHUNQKBJKLW";
+const char* ssid = "iPhone";
+const char* pass = "lukecheese";
 
 // MQTT connection details
 #define MQTT_HOST "broker.mqtt.cool"
 #define MQTT_PORT 1883
 #define MQTT_DEVICEID "lukeDHT6642"
-#define MQTT_USER "" // no need for authentication, for now
-#define MQTT_TOKEN "" // no need for authentication, for now
+#define MQTT_USER ""   // no need for authentication, for now
+#define MQTT_TOKEN ""  // no need for authentication, for now
 #define MQTT_TOPIC "lukeDHT6642/evt/status/fmt/json"
 #define MQTT_TOPIC_DISPLAY "lukeDHT6642/cmd/display/fmt/json"
 
@@ -50,10 +53,17 @@ float h = NAN;
 float t = NAN;
 
 // ----------------------------- HELPERS --------------------------------
-void logln(const String &s){
+void logln(const String& s) {
   // Use UART0 (same port you used in Option A)
   // C3 UART0: RX=GPIO20, TX=GPIO21
   Serial0.println(s);
+}
+
+// Print reasons if WiFi fails
+void printWiFiStatus(){
+  wl_status_t st = WiFi.status();
+  Serial0.print("WiFi status: ");
+  Serial0.println((int)st);
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -61,13 +71,12 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] : ");
-  
-  payload[length] = 0; // ensure valid content is zero terminated so can treat as c-string
-  Serial.println((char *)payload);
+
+  payload[length] = 0;  // ensure valid content is zero terminated so can treat as c-string
+  Serial.println((char*)payload);
 }
 
-void setup()
-{
+void setup() {
   // ---- Serial on UART0 (keep using the same cable/port you already opened)
   Serial0.begin(115200, SERIAL_8N1, 20, 21);
   delay(1000);
@@ -79,7 +88,7 @@ void setup()
   WiFi.begin(ssid, pass);
   logln("Connecting to WiFi...");
   unsigned long start = millis();
-  const unsigned long WIFI_TIMEOUT = 20000; // 20s
+  const unsigned long WIFI_TIMEOUT = 20000;  // 20s
   while (WiFi.status() != WL_CONNECTED && (millis() - start) < WIFI_TIMEOUT) {
     delay(500);
     Serial0.print(".");
@@ -95,11 +104,11 @@ void setup()
   // ---- Sensors / LED
   dht.begin();
   pixel.begin();
-  pixel.setBrightness(40); // tame brightness for a single LED
-  pixel.show();            // initialize to 'off'
-  mqtt.setServer(MQTT_HOST, MQTT_PORT); // ensure server is set
+  pixel.setBrightness(40);               // tame brightness for a single LED
+  pixel.show();                          // initialize to 'off'
+  mqtt.setServer(MQTT_HOST, MQTT_PORT);  // ensure server is set
 
-    // Connect to MQTT broker
+  // Connect to MQTT broker
   if (mqtt.connect(MQTT_DEVICEID, MQTT_USER, MQTT_TOKEN)) {
     Serial.println("MQTT Connected");
     mqtt.subscribe(MQTT_TOPIC_DISPLAY);
@@ -109,7 +118,7 @@ void setup()
   }
 }
 
-void setLed(float tempC){
+void setLed(float tempC) {
   // Compute colors
   uint8_t b = (tempC < ALARM_COLD) ? 255 : ((tempC < WARN_COLD) ? 150 : 0);
   uint8_t r = (tempC >= ALARM_HOT) ? 255 : ((tempC > WARN_HOT) ? 150 : 0);
@@ -118,7 +127,7 @@ void setLed(float tempC){
   pixel.show();
 }
 
-void loop(){
+void loop() {
 
   mqtt.loop();
   while (!mqtt.connected()) {
@@ -136,7 +145,7 @@ void loop(){
 
   // DHT needs ~1-2s between reads; we wait 10s below
   h = dht.readHumidity();
-  t = dht.readTemperature(); // Celsius
+  t = dht.readTemperature();  // Celsius
 
   if (isnan(h) || isnan(t)) {
     logln("Failed to read from DHT sensor!");
