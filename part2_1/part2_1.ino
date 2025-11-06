@@ -20,10 +20,10 @@
 #define WARN_HOT 25.0
 
 // WiFi
-//const char* ssid = "devolo-875";
-//const char* pass = "FWHMGSHUNQKBJKLW";
-const char* ssid = "iPhone";
-const char* pass = "lukecheese";
+const char* ssid = "devolo-875";
+const char* pass = "FWHMGSHUNQKBJKLW";
+//const char* ssid = "iPhone";
+//const char* pass = "lukecheese";
 
 // MQTT connection details
 #define MQTT_HOST "broker.mqtt.cool"

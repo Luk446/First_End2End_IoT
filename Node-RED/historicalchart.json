@@ -1,0 +1,185 @@
+[
+    {
+        "id": "572a4fbb.49dd48",
+        "type": "tab",
+        "label": "Historical Chart",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c31f0811.b2031",
+        "type": "function",
+        "z": "572a4fbb.49dd48",
+        "name": "Create a Chart Array for Chart.js",
+        "func": "// Convert Mongo Extended JSON docs -> ui_chart batch for Temp & Humidity\n// Example doc:\n// {\n//   payload: {\n//     time: { \"$numberDouble\": \"1762381382190.0\" },\n//     temp: { \"$numberInt\": \"19\" },\n//     humidity: { \"$numberInt\": \"65\" }\n//   }\n// }\n\nconst docs = Array.isArray(msg.payload) ? msg.payload : [];\nif (!docs.length) {\n    msg.payload = [];\n    return msg;\n}\n\n// Helper: unwrap Mongo Extended JSON numeric fields\nfunction getNum(v) {\n    if (v == null) return NaN;\n    if (typeof v === \"number\") return v;\n    if (typeof v === \"string\") return Number(v);\n    if (typeof v === \"object\") {\n        if (\"$numberDouble\" in v) return Number(v.$numberDouble);\n        if (\"$numberInt\" in v) return Number(v.$numberInt);\n        if (\"$numberLong\" in v) return Number(v.$numberLong);\n        if (\"$date\" in v) return Number(v.$date);\n    }\n    return NaN;\n}\n\n// Build arrays for both temperature and humidity\nconst tempPoints = [];\nconst humPoints = [];\n\nfor (const d of docs) {\n    const t = getNum(d?.payload?.time);\n    const temp = getNum(d?.payload?.temp);\n    const hum = getNum(d?.payload?.humidity);\n\n    if (!Number.isFinite(t)) continue; // skip invalid times\n    const ms = t < 1e12 ? t * 1000 : t; // convert seconds to ms if needed\n\n    if (Number.isFinite(temp)) tempPoints.push({ x: ms, y: temp });\n    if (Number.isFinite(hum)) humPoints.push({ x: ms, y: hum });\n}\n\n// Sort both by time\ntempPoints.sort((a, b) => a.x - b.x);\nhumPoints.sort((a, b) => a.x - b.x);\n\n// Check if we have any data\nif (!tempPoints.length && !humPoints.length) {\n    node.warn(\"No valid data points found in MongoDB results.\");\n    msg.payload = [];\n    return msg;\n}\n\n// Format for Node-RED dashboard Chart (Chart.js)\nmsg.payload = [\n    {\n        series: [\"Temperature (°C)\", \"Humidity (%)\"],\n        data: [tempPoints, humPoints],\n        labels: [\"Temp\", \"Humidity\"]\n    }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 440,
+        "wires": [
+            [
+                "958dd94a.779118",
+                "64d728269dcc5f19"
+            ]
+        ]
+    },
+    {
+        "id": "3a3fe33a38dca301",
+        "type": "mongodb in",
+        "z": "572a4fbb.49dd48",
+        "mongodb": "672669c2038e4a65",
+        "name": "Atlas_mongo_readings",
+        "collection": "readings",
+        "operation": "find",
+        "x": 360,
+        "y": 440,
+        "wires": [
+            [
+                "c31f0811.b2031",
+                "708243e090d8939f"
+            ]
+        ]
+    },
+    {
+        "id": "d7e60f13a872ba8f",
+        "type": "inject",
+        "z": "572a4fbb.49dd48",
+        "name": "Fetch Data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 160,
+        "y": 440,
+        "wires": [
+            [
+                "3a3fe33a38dca301"
+            ]
+        ]
+    },
+    {
+        "id": "958dd94a.779118",
+        "type": "debug",
+        "z": "572a4fbb.49dd48",
+        "name": "SecondDebug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "708243e090d8939f",
+        "type": "debug",
+        "z": "572a4fbb.49dd48",
+        "name": "FirstDebug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "64d728269dcc5f19",
+        "type": "ui_chart",
+        "z": "572a4fbb.49dd48",
+        "name": "",
+        "group": "5571671c.8ea9b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "ESP8266 DHT Historian Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "672669c2038e4a65",
+        "type": "mongodb",
+        "hostname": "cluster0.tsy6wqh.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "",
+        "port": 27017,
+        "db": "DHT_data",
+        "name": "Atlas_mongo"
+    },
+    {
+        "id": "5571671c.8ea9b",
+        "type": "ui_group",
+        "name": "Historical Data",
+        "tab": "1f3fcf14.3e0841",
+        "order": 1,
+        "disp": true,
+        "width": "18"
+    },
+    {
+        "id": "1f3fcf14.3e0841",
+        "type": "ui_tab",
+        "name": "Historical Data",
+        "icon": "fa-area-chart",
+        "order": 5
+    },
+    {
+        "id": "511fa599863eb36e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mongodb": "0.2.5",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]

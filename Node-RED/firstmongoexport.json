@@ -1,0 +1,133 @@
+[
+    {
+        "id": "4ed4e10fea10b440",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "893618c1dffacec3",
+        "type": "mqtt in",
+        "z": "4ed4e10fea10b440",
+        "name": "",
+        "topic": "lukeDHT6642/evt/status/fmt/json",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "cd8065c1b920840f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "3f0be2ca.a1cc0e"
+            ]
+        ]
+    },
+    {
+        "id": "f3461eb257717c15",
+        "type": "mongodb out",
+        "z": "4ed4e10fea10b440",
+        "mongodb": "672669c2038e4a65",
+        "name": "",
+        "collection": "readings",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 1060,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a9993101bce14d38",
+        "type": "debug",
+        "z": "4ed4e10fea10b440",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3f0be2ca.a1cc0e",
+        "type": "function",
+        "z": "4ed4e10fea10b440",
+        "name": "Format Time Series DB record",
+        "func": "msg.payload = {\n        time:     new Date().getTime(),\n        temp:     msg.payload.d.temp,\n        humidity: msg.payload.d.humidity\n    } ;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 340,
+        "wires": [
+            [
+                "a9993101bce14d38",
+                "f3461eb257717c15"
+            ]
+        ]
+    },
+    {
+        "id": "cd8065c1b920840f",
+        "type": "mqtt-broker",
+        "name": "https://testclient-cloud.mqtt.cool/",
+        "broker": "tcp://broker.mqtt.cool:1883",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "672669c2038e4a65",
+        "type": "mongodb",
+        "hostname": "cluster0.tsy6wqh.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "",
+        "port": 27017,
+        "db": "DHT_data",
+        "name": "Atlas_mongo"
+    },
+    {
+        "id": "37029826fbcefb5e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mongodb": "0.2.5"
+        }
+    }
+]
