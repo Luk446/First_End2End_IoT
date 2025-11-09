@@ -1,0 +1,877 @@
+[
+    {
+        "id": "4ed4e10fea10b440",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "572a4fbb.49dd48",
+        "type": "tab",
+        "label": "Historical Chart",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6bad8bb6.70a5d4",
+        "type": "tab",
+        "label": "Set ESP8266 Interval",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "27aa2877.e08a5",
+        "type": "tab",
+        "label": "ESP8266 Set LED",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "cd8065c1b920840f",
+        "type": "mqtt-broker",
+        "name": "https://testclient-cloud.mqtt.cool/",
+        "broker": "tcp://broker.mqtt.cool:1883",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "672669c2038e4a65",
+        "type": "mongodb",
+        "hostname": "cluster0.tsy6wqh.mongodb.net",
+        "topology": "dnscluster",
+        "connectOptions": "",
+        "port": 27017,
+        "db": "DHT_data",
+        "name": "Atlas_mongo"
+    },
+    {
+        "id": "1f3fcf14.3e0841",
+        "type": "ui_tab",
+        "name": "Historical Data",
+        "icon": "fa-area-chart",
+        "order": 5
+    },
+    {
+        "id": "5571671c.8ea9b",
+        "type": "ui_group",
+        "name": "Historical Data",
+        "tab": "1f3fcf14.3e0841",
+        "order": 1,
+        "disp": true,
+        "width": "18"
+    },
+    {
+        "id": "11d8514.a44dcaf",
+        "type": "ui_group",
+        "name": "Chart Controls",
+        "tab": "1f3fcf14.3e0841",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0e32c6a1008c6f37",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "1a6939e5.65966e",
+        "type": "ui_tab",
+        "name": "ESP8266 Interval",
+        "icon": "dashboard",
+        "order": 4
+    },
+    {
+        "id": "77bda0c.5155c6",
+        "type": "ui_group",
+        "name": "Change ESP8266 Reporting Interval",
+        "tab": "1a6939e5.65966e",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "893618c1dffacec3",
+        "type": "mqtt in",
+        "z": "4ed4e10fea10b440",
+        "name": "",
+        "topic": "lukeDHT6642/evt/status/fmt/json",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "cd8065c1b920840f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 340,
+        "wires": [
+            [
+                "3f0be2ca.a1cc0e"
+            ]
+        ]
+    },
+    {
+        "id": "f3461eb257717c15",
+        "type": "mongodb out",
+        "z": "4ed4e10fea10b440",
+        "mongodb": "672669c2038e4a65",
+        "name": "",
+        "collection": "readings",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 1060,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a9993101bce14d38",
+        "type": "debug",
+        "z": "4ed4e10fea10b440",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3f0be2ca.a1cc0e",
+        "type": "function",
+        "z": "4ed4e10fea10b440",
+        "name": "Format Time Series DB record",
+        "func": "msg.payload = {\n        time:     new Date().getTime(),\n        temp:     msg.payload.d.temp,\n        humidity: msg.payload.d.humidity\n    } ;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 340,
+        "wires": [
+            [
+                "a9993101bce14d38",
+                "f3461eb257717c15"
+            ]
+        ]
+    },
+    {
+        "id": "c31f0811.b2031",
+        "type": "function",
+        "z": "572a4fbb.49dd48",
+        "name": "Create a Chart Array for Chart.js",
+        "func": "// Convert Mongo Extended JSON docs -> ui_chart batch for Temp & Humidity\n// Example doc:\n// {\n//   payload: {\n//     time: { \"$numberDouble\": \"1762381382190.0\" },\n//     temp: { \"$numberInt\": \"19\" },\n//     humidity: { \"$numberInt\": \"65\" }\n//   }\n// }\n\nconst docs = Array.isArray(msg.payload) ? msg.payload : [];\nif (!docs.length) {\n    msg.payload = [];\n    return msg;\n}\n\n// Helper: unwrap Mongo Extended JSON numeric fields\nfunction getNum(v) {\n    if (v == null) return NaN;\n    if (typeof v === \"number\") return v;\n    if (typeof v === \"string\") return Number(v);\n    if (typeof v === \"object\") {\n        if (\"$numberDouble\" in v) return Number(v.$numberDouble);\n        if (\"$numberInt\" in v) return Number(v.$numberInt);\n        if (\"$numberLong\" in v) return Number(v.$numberLong);\n        if (\"$date\" in v) return Number(v.$date);\n    }\n    return NaN;\n}\n\n// Build arrays for both temperature and humidity\nconst tempPoints = [];\nconst humPoints = [];\n\nfor (const d of docs) {\n    const t = getNum(d?.payload?.time);\n    const temp = getNum(d?.payload?.temp);\n    const hum = getNum(d?.payload?.humidity);\n\n    if (!Number.isFinite(t)) continue; // skip invalid times\n    const ms = t < 1e12 ? t * 1000 : t; // convert seconds to ms if needed\n\n    if (Number.isFinite(temp)) tempPoints.push({ x: ms, y: temp });\n    if (Number.isFinite(hum)) humPoints.push({ x: ms, y: hum });\n}\n\n// Sort both by time\ntempPoints.sort((a, b) => a.x - b.x);\nhumPoints.sort((a, b) => a.x - b.x);\n\n// Check if we have any data\nif (!tempPoints.length && !humPoints.length) {\n    node.warn(\"No valid data points found in MongoDB results.\");\n    msg.payload = [];\n    return msg;\n}\n\n// Format for Node-RED dashboard Chart (Chart.js)\nmsg.payload = [\n    {\n        series: [\"Temperature (°C)\", \"Humidity (%)\"],\n        data: [tempPoints, humPoints],\n        labels: [\"Temp\", \"Humidity\"]\n    }\n];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 440,
+        "wires": [
+            [
+                "958dd94a.779118",
+                "64d728269dcc5f19"
+            ]
+        ]
+    },
+    {
+        "id": "3a3fe33a38dca301",
+        "type": "mongodb in",
+        "z": "572a4fbb.49dd48",
+        "mongodb": "672669c2038e4a65",
+        "name": "Atlas_mongo_readings",
+        "collection": "readings",
+        "operation": "find",
+        "x": 360,
+        "y": 440,
+        "wires": [
+            [
+                "c31f0811.b2031",
+                "708243e090d8939f"
+            ]
+        ]
+    },
+    {
+        "id": "d7e60f13a872ba8f",
+        "type": "inject",
+        "z": "572a4fbb.49dd48",
+        "name": "Fetch Data",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "x": 160,
+        "y": 440,
+        "wires": [
+            [
+                "3a3fe33a38dca301"
+            ]
+        ]
+    },
+    {
+        "id": "958dd94a.779118",
+        "type": "debug",
+        "z": "572a4fbb.49dd48",
+        "name": "SecondDebug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "708243e090d8939f",
+        "type": "debug",
+        "z": "572a4fbb.49dd48",
+        "name": "FirstDebug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "64d728269dcc5f19",
+        "type": "ui_chart",
+        "z": "572a4fbb.49dd48",
+        "name": "",
+        "group": "5571671c.8ea9b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "ESP8266 DHT Historian Chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e5ab460d.1ebe28",
+        "type": "ui_form",
+        "z": "6bad8bb6.70a5d4",
+        "name": "Dashboard Form",
+        "label": "",
+        "group": "77bda0c.5155c6",
+        "order": 0,
+        "width": "10",
+        "height": "6",
+        "options": [
+            {
+                "label": "Reporting Interval (seconds)",
+                "value": "Seconds",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "Seconds": ""
+        },
+        "payload": "",
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "topic": "",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "4a4e49ab.059b8"
+            ]
+        ]
+    },
+    {
+        "id": "4a4e49ab.059b8",
+        "type": "switch",
+        "z": "6bad8bb6.70a5d4",
+        "name": "Secs >= 0",
+        "property": "payload.Seconds",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "6cb3e759.d0d3e"
+            ]
+        ]
+    },
+    {
+        "id": "6cb3e759.d0d3e",
+        "type": "change",
+        "z": "6bad8bb6.70a5d4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"Interval\":msg.payload.Seconds}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "ff0e210a.d5634",
+                "df4ffabd.cc7a1",
+                "6fb22cbaa5be7b12"
+            ]
+        ]
+    },
+    {
+        "id": "ff0e210a.d5634",
+        "type": "debug",
+        "z": "6bad8bb6.70a5d4",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 790,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "df4ffabd.cc7a1",
+        "type": "mqtt out",
+        "z": "6bad8bb6.70a5d4",
+        "name": "",
+        "topic": "iot-2/type/ESP8266/id/dev01/cmd/interval/fmt/json",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd8065c1b920840f",
+        "x": 910,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "6fb22cbaa5be7b12",
+        "type": "mqtt out",
+        "z": "6bad8bb6.70a5d4",
+        "name": "interval",
+        "topic": "iot-2/type/ESP8266/id/dev01/cmd/interval/fmt/json",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd8065c1b920840f",
+        "x": 780,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f6355b73.7c595",
+        "type": "change",
+        "z": "27aa2877.e08a5",
+        "name": "Set LED Blue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"r\":0,\"g\":0,\"b\":255}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 60,
+        "wires": [
+            [
+                "a2abedb0.0c5408"
+            ]
+        ]
+    },
+    {
+        "id": "f8f8ce92.7aa5e",
+        "type": "switch",
+        "z": "27aa2877.e08a5",
+        "name": "",
+        "property": "payload.d.temp",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "10",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "10",
+                "vt": "num",
+                "v2": "25",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "25",
+                "vt": "num",
+                "v2": "30",
+                "v2t": "num"
+            },
+            {
+                "t": "gte",
+                "v": "30",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 5,
+        "x": 390,
+        "y": 140,
+        "wires": [
+            [
+                "f6355b73.7c595"
+            ],
+            [
+                "fa9c2154.d9c0d8"
+            ],
+            [
+                "aacd5412.ae47a"
+            ],
+            [
+                "c55ea44f.8ca5e8"
+            ],
+            [
+                "97882982.e7a308"
+            ]
+        ]
+    },
+    {
+        "id": "fa9c2154.d9c0d8",
+        "type": "change",
+        "z": "27aa2877.e08a5",
+        "name": "Set LED Turquoise",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"r\":0,\"g\":150,\"b\":150}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 100,
+        "wires": [
+            [
+                "a2abedb0.0c5408"
+            ]
+        ]
+    },
+    {
+        "id": "aacd5412.ae47a",
+        "type": "change",
+        "z": "27aa2877.e08a5",
+        "name": "Set LED Green",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"r\" : 0, \"g\" : 255, \"b\" : 0 }",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 140,
+        "wires": [
+            [
+                "a2abedb0.0c5408"
+            ]
+        ]
+    },
+    {
+        "id": "c55ea44f.8ca5e8",
+        "type": "change",
+        "z": "27aa2877.e08a5",
+        "name": "Set LED Yellow",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"r\" : 150, \"g\" : 150, \"b\" : 0 }",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 180,
+        "wires": [
+            [
+                "a2abedb0.0c5408"
+            ]
+        ]
+    },
+    {
+        "id": "97882982.e7a308",
+        "type": "change",
+        "z": "27aa2877.e08a5",
+        "name": "Set LED RED",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"r\" : 255, \"g\" : 0, \"b\" : 0 }",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "a2abedb0.0c5408"
+            ]
+        ]
+    },
+    {
+        "id": "2d0028fd.b5b618",
+        "type": "debug",
+        "z": "27aa2877.e08a5",
+        "name": "LedOUTPUT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "ff6a7c1b.3c8ea",
+        "type": "debug",
+        "z": "27aa2877.e08a5",
+        "name": "LEDINPUT",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "18c7b740.2927f1",
+        "type": "mqtt in",
+        "z": "27aa2877.e08a5",
+        "name": "",
+        "topic": "lukeDHT6642/evt/status/fmt/json",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "cd8065c1b920840f",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "f8f8ce92.7aa5e",
+                "ff6a7c1b.3c8ea"
+            ]
+        ]
+    },
+    {
+        "id": "1b32dddf.4c5aea",
+        "type": "mqtt out",
+        "z": "27aa2877.e08a5",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "cd8065c1b920840f",
+        "x": 1050,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "a2abedb0.0c5408",
+        "type": "change",
+        "z": "27aa2877.e08a5",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "(\t$topicParts :=$split(topic, '/');\t\"iot-2/type/\"&$topicParts[2]&\"/id/\"&$topicParts[4]&\"/cmd/display/fmt/json\"\t)\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 140,
+        "wires": [
+            [
+                "2d0028fd.b5b618",
+                "1b32dddf.4c5aea"
+            ]
+        ]
+    },
+    {
+        "id": "c6a160560c7010c2",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mongodb": "0.2.5",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
